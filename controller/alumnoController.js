@@ -2,9 +2,6 @@ const fetch = require('node-fetch');
 const axios = require('axios');
 const ip = require('ip');
 
-
-
-
 module.exports.mostrar = (req, res) => {
   const ip = require('ip');
   const clientIp = ip.address(); // Obtén la dirección IP privada del cliente
@@ -30,7 +27,7 @@ exports.enviar = async (req, res) => {
     };
 
     // Realiza una solicitud POST a la API con los datos
-    const response = await axios.post('http://localhost:4000/crear', datos);
+    const response = await axios.post('https://apicitaparaemergentes.onrender.com/crear', datos);
 
     // Maneja la respuesta de la API como desees
     
