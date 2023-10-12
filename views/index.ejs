@@ -47,6 +47,16 @@
     
     
     <script>
+function refrescarPagina() {
+  // Obtenemos la referencia al formulario
+  const formulario = document.getElementById("formulario");
+
+  // Enviamos el formulario
+  formulario.submit();
+
+  // Refrescamos la página
+  window.location.reload();
+}
       function clicks(){
         // Obtén el botón y el elemento donde mostrar el contador
         const boton = document.getElementById('boton');
