@@ -7,11 +7,10 @@ const ip = require('ip');
 
 module.exports.mostrar = (req, res) => {
   const ip = require('ip');
-  const clientIp = ip.address(); 
+  const clientIp = ip.address(); // Obtén la dirección IP privada del cliente
   res.render('index', { "clientIp": clientIp });
 };
 
-// Función para enviar los datos al servidor de la API
 exports.enviar = async (req, res) => {
   try {
     // Obtén los valores de los campos del formulario
@@ -31,13 +30,17 @@ exports.enviar = async (req, res) => {
     };
 
     // Realiza una solicitud POST a la API con los datos
-    const response = await axios.post('https://apicitaparaemergentes.onrender.com/crear', datos);
+    const response = await axios.post('http://localhost:4000/crear', datos);
 
     // Maneja la respuesta de la API como desees
     
 
     // Responde a la solicitud en tu controlador de aplicación
-    res.status(200).json({ mensaje: 'Solicitud POST enviada con éxito' });
+    if (response.data.mensaje === '¡Registro guardado correctamente!') {
+      res.redirect(302, '/');
+    } else {
+      res.status(200).json({ mensaje: response.data.mensaje });
+    }
   } catch (error) {
     console.error('Error al enviar la solicitud POST a la API:', error);
     res.status(500).json({ error: 'Error en la solicitud POST a la API' });
